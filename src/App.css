@@ -1,0 +1,13 @@
+.app {
+    overflow: hidden;
+}
+
+.inputs-container {
+    position: relative;
+}
+
+.inputs-container_how-many-left {
+    position: absolute;
+    right: 108px;
+    top: 3px;
+}

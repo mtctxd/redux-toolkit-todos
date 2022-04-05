@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
@@ -85,69 +86,106 @@ function App() {
   };
 
   return (
-    <div className="App">
-      {/* <ul class="list-group">
-        <li class="list-group-item">An item</li>
-        <li class="list-group-item">A second item</li>
-        <li class="list-group-item">A third item</li>
-        <li class="list-group-item">A fourth item</li>
-        <li class="list-group-item">And a fifth one</li>
-      </ul> */}
-      <div>
+    <div className="app">
+      <div className="input-group mb-3 inputs-container">
+        <button
+          className="btn btn-outline-secondary dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Menu
+        </button>
+        <ul className="dropdown-menu">
+          <li>
+            <button
+              className="dropdown-item"
+              onClick={() => dispatch(changeShowMethod('regular'))}
+            >
+              all
+            </button>
+          </li>
+          <li>
+            <button
+              className="dropdown-item"
+              onClick={() => dispatch(changeShowMethod('notCompletedItems'))}
+            >
+              active
+            </button>
+          </li>
+          <li>
+            <button
+              className="dropdown-item"
+              onClick={() => dispatch(changeShowMethod('completedItems'))}
+            >
+              completed
+            </button>
+          </li>
+          <li><hr className="dropdown-divider" /></li>
+          <li>
+            <button
+              className="dropdown-item"
+              onClick={() => {
+                dispatch(clearAllTodos());
+                dispatch(resetStorage())
+              }}>
+                clear all
+            </button>
+          </li>
+          {todos.some((todo) => todo.completed) && (
+            <li>
+              <button
+                className="dropdown-item"
+                onClick={() => dispatch(clearCompleted())}
+              >
+                clear completed
+              </button>
+            </li>
+          )}
+        </ul>
         <input
-          placeholder="enter todo title"
+          placeholder="slap your thas rigth there"
           type="text"
           name="newTodoTitle"
           value={inputs.newTodoTitle}
           onChange={handleInput}
+          className="form-control"
         />
-        <button onClick={handleAddNewTodo}>Add todo</button>
-        <button onClick={() => dispatch(changeShowMethod('regular'))}>
-          All
+        <button className="btn btn-outline-secondary" type="button" onClick={handleAddNewTodo}>
+          ADD TASK
         </button>
-        <button onClick={() => dispatch(changeShowMethod('notCompletedItems'))}>
-          Active
-        </button>
-        <button onClick={() => dispatch(changeShowMethod('completedItems'))}>
-          Completed
-        </button>
-        {todos.some((todo) => todo.completed) && (
-          <button onClick={() => dispatch(clearCompleted())}>
-            Clear all completed
-          </button>
+      </div>
+      <span className='inputs-container_how-many-left fs-5 text-muted'>
+        {`left: ${notCompletedItems().length}`}
+      </span>
+      <div>
+        {(inputs.newTodoTitle === 'fetch') && (
+          <div>
+            <input
+              placeholder="how many todos you want"
+              type="text"
+              name="fetchTodoLimit"
+              value={inputs.fetchTodoLimit}
+              onChange={handleInput}
+            />
+            <button
+              onClick={() => {
+                const searchParams = new URLSearchParams();
+                searchParams.set('_limit', inputs.fetchTodoLimit);
+                dispatch(fetchTodos(searchParams.toString()));
+              }}
+            >
+              fetch some todos
+            </button>
+            {fetchStatus === 'Rejected' && (
+              <span>
+                {'could not load data :<'}
+                {console.log(fetchStatus)}
+              </span>
+            )}
+          </div>
         )}
-      </div>
-      <div>
-        <input
-          placeholder="how many todos you want"
-          type="text"
-          name="fetchTodoLimit"
-          value={inputs.fetchTodoLimit}
-          onChange={handleInput}
-        />
-        <button
-          onClick={() => {
-            const searchParams = new URLSearchParams();
-            searchParams.set('_limit', inputs.fetchTodoLimit);
-            dispatch(fetchTodos(searchParams.toString()));
-          }}
-        >
-          fetch some todos
-        </button>
-        <span>{inputs.fetchTodoLimit}</span>
-        {fetchStatus === 'Rejected' && (
-          <span>
-            {'could not load data :<'}
-            {console.log(fetchStatus)}
-          </span>
-        )}
-      </div>
-      <div>
-        <button onClick={() => dispatch(clearAllTodos())}>Clear all</button>
-        <button onClick={() => dispatch(resetStorage())}>Reset Storage</button>
-      </div>
-      <div>
-        <h2>{`Items left: ${notCompletedItems().length}`}</h2>
+        
       </div>
       <ul>
         {todosToShow.map((todo) => (

@@ -7,9 +7,16 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - [ ] error handling on fetch
 - [ ] add some styles
 - [ ] implement saving to local storage
-- [ ] update README.md
 - [ ] not correct item rendering after fetching with params
 - [X] when trying to change tototitle it open multiple inputs
+- [ ] optimizing rendering
+- [ ] fetchTodos --> RTK Query
+- [ ] update README.md
+- [ ] keypress on changing todo and entering todo title
+
+## Thoughts
+
+- make different slices (todosInteraction, formInteraction)
 
 ## Available Scripts
 
