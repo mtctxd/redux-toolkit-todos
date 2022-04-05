@@ -1,22 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
-import { Todo } from './components/Todo.tsx';
-import { addTodo, changeShowMethod, clearAllTodos, clearCompleted, fetchTodos } from './slices/todoSlice';
+import { Todo } from './components/Todo.jsx';
+import {
+  addTodo,
+  changeShowMethod,
+  clearAllTodos,
+  clearCompleted,
+  fetchTodos,
+  resetStorage,
+} from './slices/todoSlice';
 
 const initilaInputsState = {
   newTodoTitle: '',
   inputToChange: '',
+  fetchTodoLimit: '',
 };
 
 function App() {
   const dispatch = useDispatch();
 
-  const [inputs, setInputs] = useState(initilaInputsState);
+  let [inputs, setInputs] = useState(initilaInputsState);
 
-  const todos = useSelector((state) => state.todos);
-  const showMethod = useSelector((state) => state.showMethod);
-  const fetchStatus = useSelector(state => state.fetchStatus);
+  let store = useSelector((state) => state);
+
+  const { todos, showMethod, fetchStatus } = store;
+
+  useEffect(() => {
+    localStorage.setItem('store', JSON.stringify(store));
+  }, [store]);
 
   const notCompletedItems = () => todos.filter((todo) => !todo.completed);
   const completedItems = () => todos.filter((todo) => todo.completed);
@@ -68,8 +80,16 @@ function App() {
 
   return (
     <div className="App">
+      <ul class="list-group">
+        <li class="list-group-item">An item</li>
+        <li class="list-group-item">A second item</li>
+        <li class="list-group-item">A third item</li>
+        <li class="list-group-item">A fourth item</li>
+        <li class="list-group-item">And a fifth one</li>
+      </ul>
       <div>
         <input
+          placeholder="enter todo title"
           type="text"
           name="newTodoTitle"
           value={inputs.newTodoTitle}
@@ -92,22 +112,33 @@ function App() {
         )}
       </div>
       <div>
+        <input
+          placeholder="how many todos you want"
+          type="text"
+          name="fetchTodoLimit"
+          value={inputs.fetchTodoLimit}
+          onChange={handleInput}
+        />
         <button
-          onClick={() => dispatch(clearAllTodos())}
+          onClick={() => {
+            const searchParams = new URLSearchParams();
+            searchParams.set('_limit', inputs.fetchTodoLimit);
+            dispatch(fetchTodos(searchParams.toString()));
+          }}
         >
-          Clear all
+          fetch some todos
         </button>
-        <button
-          onClick={() => dispatch(fetchTodos())}
-        >
-          fetch fome todos
-        </button>
-        {(fetchStatus === 'Rejected') && (
+        <span>{inputs.fetchTodoLimit}</span>
+        {fetchStatus === 'Rejected' && (
           <span>
             {'could not load data :<'}
             {console.log(fetchStatus)}
           </span>
         )}
+      </div>
+      <div>
+        <button onClick={() => dispatch(clearAllTodos())}>Clear all</button>
+        <button onClick={() => dispatch(resetStorage())}>Reset Storage</button>
       </div>
       <div>
         <h2>{`Items left: ${notCompletedItems().length}`}</h2>
@@ -122,11 +153,7 @@ function App() {
             key={todo.id}
           />
         ))}
-        {(fetchStatus === 'Pending') && (
-          <div>
-            Loading....
-          </div>
-        )}
+        {fetchStatus === 'Pending' && <div>Loading....</div>}
       </ul>
     </div>
   );

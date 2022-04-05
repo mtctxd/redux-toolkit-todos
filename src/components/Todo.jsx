@@ -15,13 +15,15 @@ export const Todo = ({ todo, handleInput, setInputs, inputs }) => {
     }
   };
 
-  const toogleTodoInputActive = (todo) => {
-    setFocusedTodo(todo.id);
+  const toogleTodoInputActive = (id) => {
+    setFocusedTodo(id);
     setInputs((state) => ({
       ...state,
       inputToChange: todo.title,
     }));
   };
+
+  console.log(!focusedTodo);
 
   return (
     <li>
@@ -30,8 +32,8 @@ export const Todo = ({ todo, handleInput, setInputs, inputs }) => {
         checked={todo.completed}
         onChange={() => dispatch(toggleCompletedTodo(todo.id))}
       />
-      <span onClick={() => toogleTodoInputActive(todo)}>
-        {focusedTodo === todo.id ? (
+      <span onClick={() => toogleTodoInputActive(todo.id) }>
+        {(focusedTodo === todo.id) ? (
           <input
             type="text"
             name="inputToChange"
