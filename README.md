@@ -3,11 +3,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## [DEMO](https://mtctxd.github.io/redux-toolkit-todos/)
 
 ## TODO
-- [] rework Todo.tsx
-- [] error handling on fetch
-- [] add some styles
-- [] implement saving to local storage
-- [] update README.md
+- [ ] rework Todo.tsx
+- [ ] error handling on fetch
+- [ ] add some styles
+- [ ] implement saving to local storage
+- [ ] update README.md
+- [ ] not correct item rendering after fetching with params
+- [X] when trying to change tototitle it open multiple inputs
 
 ## Available Scripts
 

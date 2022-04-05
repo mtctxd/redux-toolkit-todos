@@ -27,7 +27,13 @@ function App() {
   const { todos, showMethod, fetchStatus } = store;
 
   useEffect(() => {
-    localStorage.setItem('store', JSON.stringify(store));
+    localStorage.setItem(
+      'store',
+      JSON.stringify({
+        ...store,
+        activeTodoToChange: null,
+      })
+    );
   }, [store]);
 
   const notCompletedItems = () => todos.filter((todo) => !todo.completed);
@@ -80,13 +86,13 @@ function App() {
 
   return (
     <div className="App">
-      <ul class="list-group">
+      {/* <ul class="list-group">
         <li class="list-group-item">An item</li>
         <li class="list-group-item">A second item</li>
         <li class="list-group-item">A third item</li>
         <li class="list-group-item">A fourth item</li>
         <li class="list-group-item">And a fifth one</li>
-      </ul>
+      </ul> */}
       <div>
         <input
           placeholder="enter todo title"

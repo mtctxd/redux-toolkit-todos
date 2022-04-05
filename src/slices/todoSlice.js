@@ -23,10 +23,12 @@ let initialState = {
   ],
   showMethod: 'regular',
   fetchStatus: 'standby',
+  activeTodoToChange: null,
 };
 
 const emptyState = {
   todos: [],
+  activeTodoToChange: null,
   showMethod: 'regular',
   fetchStatus: 'standby',
 }
@@ -90,6 +92,9 @@ const todoSlice = createSlice({
       );
       matchedTodo.title = action.payload.title;
     },
+    setActiveTodo: (state, action) => {
+      state.activeTodoToChange = action.payload;
+    },
     changeShowMethod: (state, action) => {
       switch (action.payload) {
         case 'notCompletedItems':
@@ -115,6 +120,8 @@ const todoSlice = createSlice({
       state.todos = emptyState.todos;
       state.fetchStatus = emptyState.fetchStatus;
       state.showMethod = emptyState.showMethod;
+      //repeating code
+      state.activeTodoToChange = emptyState.activeTodoToChange 
     }
   },
   extraReducers: {
@@ -141,6 +148,8 @@ export const {
   clearCompleted,
   clearAllTodos,
   resetStorage,
+  setActiveTodo,
+  resetActiveTodo,
 } = todoSlice.actions;
 
 export default todoSlice;
