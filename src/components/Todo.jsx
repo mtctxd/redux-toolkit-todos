@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import {
   changeTitleOfTodo,
-  resetActiveTodo,
   setActiveTodo,
   toggleCompletedTodo,
 } from '../slices/todoSlice';
@@ -16,7 +15,7 @@ export const Todo = ({ todo, handleInput, setInputs, inputs }) => {
       const info = { id, title };
 
       dispatch(changeTitleOfTodo(info));
-      dispatch(resetActiveTodo());
+      dispatch(setActiveTodo(null));
     }
   };
 
@@ -29,14 +28,49 @@ export const Todo = ({ todo, handleInput, setInputs, inputs }) => {
   };
 
   return (
-    <li>
-      <input
-        type="checkbox"
-        checked={todo.completed}
-        onChange={() => dispatch(toggleCompletedTodo(todo.id))}
-      />
-      {/* <span onClick={() => toogleTodoInputActive(todo.id) }> */}
-      <span onClick={() => toogleTodoInputActive(todo.id)}>
+    // <li className="list-group-item">
+    //   <input
+    //     type="checkbox"
+    //     checked={todo.completed}
+    //     onChange={() => dispatch(toggleCompletedTodo(todo.id))}
+    //   />
+    //   <span onClick={() => toogleTodoInputActive(todo.id)}>
+    //     {activeTodoToChange === todo.id ? (
+    //       <input
+    //         type="text"
+    //         name="inputToChange"
+    //         value={inputs.inputToChange}
+    //         onKeyDown={(event) =>
+    //           handleTodoTitleKeyDown(event, inputs.inputToChange, todo.id)
+    //         }
+    //         onChange={handleInput}
+    //         className="form-control"
+    //       />
+    //     ) : (
+    //       todo.title
+    //     )}
+    //   </span>
+    // </li>
+    <li className="list-group-item task-container">
+      <div>
+        <div
+          className="btn-group"
+          role="group"
+          aria-label="Basic checkbox toggle button group"
+        >
+          <input
+            type="checkbox"
+            className="btn-check"
+            id={todo.id}
+            checked={todo.completed}
+            onChange={() => dispatch(toggleCompletedTodo(todo.id))}
+          />
+          <label className="btn btn-outline-primary" for={todo.id}>
+            X
+          </label>
+        </div>
+      </div>
+      <div className="task-item">
         {activeTodoToChange === todo.id ? (
           <input
             type="text"
@@ -46,11 +80,14 @@ export const Todo = ({ todo, handleInput, setInputs, inputs }) => {
               handleTodoTitleKeyDown(event, inputs.inputToChange, todo.id)
             }
             onChange={handleInput}
+            className="form-control task-input"
           />
         ) : (
-          todo.title
+          <span onClick={() => toogleTodoInputActive(todo.id)} className="task-title">
+            {todo.title}
+          </span>
         )}
-      </span>
+      </div>
     </li>
   );
 };

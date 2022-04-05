@@ -10,6 +10,7 @@ import {
   clearCompleted,
   fetchTodos,
   resetStorage,
+  setAllTodosAsCompleted,
 } from './slices/todoSlice';
 
 const initilaInputsState = {
@@ -85,6 +86,12 @@ function App() {
     inputs.newTodoTitle = initilaInputsState.newTodoTitle;
   };
 
+  const handleKeyDownEnterForTodoAdd = (event) => {
+    if (event.key === 'Enter') {
+      handleAddNewTodo(event)
+    }
+  };
+
   return (
     <div className="app">
       <div className="input-group mb-3 inputs-container">
@@ -142,20 +149,29 @@ function App() {
               </button>
             </li>
           )}
+          <li>
+              <button
+                className="dropdown-item"
+                onClick={() => dispatch(setAllTodosAsCompleted())}
+              >
+                complete all
+              </button>
+            </li>
         </ul>
         <input
-          placeholder="slap your thas rigth there"
+          placeholder="slap your task rigth there"
           type="text"
           name="newTodoTitle"
           value={inputs.newTodoTitle}
           onChange={handleInput}
+          onKeyDown={handleKeyDownEnterForTodoAdd}
           className="form-control"
         />
         <button className="btn btn-outline-secondary" type="button" onClick={handleAddNewTodo}>
           ADD TASK
         </button>
       </div>
-      <span className='inputs-container_how-many-left fs-5 text-muted'>
+      <span className='inputs-container_how-many-left fs-6 text-muted'>
         {`left: ${notCompletedItems().length}`}
       </span>
       <div>
@@ -187,7 +203,7 @@ function App() {
         )}
         
       </div>
-      <ul>
+      <ul className="list-group">
         {todosToShow.map((todo) => (
           <Todo
             todo={todo}

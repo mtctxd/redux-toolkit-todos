@@ -93,7 +93,13 @@ const todoSlice = createSlice({
       matchedTodo.title = action.payload.title;
     },
     setActiveTodo: (state, action) => {
-      state.activeTodoToChange = action.payload;
+      state.activeTodoToChange = action.payload || null;
+    },
+    setAllTodosAsCompleted: (state) => {
+      state.todos = state.todos.map(todo => ({
+        ...todo,
+        completed: true,
+      }))
     },
     changeShowMethod: (state, action) => {
       switch (action.payload) {
@@ -149,7 +155,7 @@ export const {
   clearAllTodos,
   resetStorage,
   setActiveTodo,
-  resetActiveTodo,
+  setAllTodosAsCompleted,
 } = todoSlice.actions;
 
 export default todoSlice;

@@ -9,5 +9,31 @@
 .inputs-container_how-many-left {
     position: absolute;
     right: 108px;
-    top: 3px;
+    top: 7px;
+}
+
+.task-container {
+    display: flex;
+}
+
+.task-item {
+    position: relative;
+    width: 100%;
+}
+
+.task-input {
+    outline: none;
+    border: none;
+}
+
+.task-input:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+.task-title {
+    position: absolute;
+    left: 10px;
+    top: 8px;
 }

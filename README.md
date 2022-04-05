@@ -5,14 +5,16 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## TODO
 - [ ] rework Todo.tsx
 - [ ] error handling on fetch
-- [ ] add some styles
+- [x] add some styles
 - [ ] implement saving to local storage
-- [ ] not correct item rendering after fetching with params
+- [ ] not correct item rendering after fetching with params (show 7 instead of 11)
 - [X] when trying to change tototitle it open multiple inputs
 - [ ] optimizing rendering
 - [ ] fetchTodos --> RTK Query
+- [X] keypress on changing todo and entering todo title
 - [ ] update README.md
-- [ ] keypress on changing todo and entering todo title
+
+### type ``fetch`` to test fetching todos from api
 
 ## Thoughts
 
