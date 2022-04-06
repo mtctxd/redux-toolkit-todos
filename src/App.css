@@ -1,7 +1,3 @@
-.app {
-    overflow: hidden;
-}
-
 .inputs-container {
     position: relative;
 }
@@ -21,19 +17,8 @@
     width: 100%;
 }
 
-.task-input {
-    outline: none;
-    border: none;
-}
-
-.task-input:focus {
-    outline: none;
-    border: none;
-    box-shadow: none;
-}
-
 .task-title {
     position: absolute;
-    left: 10px;
-    top: 8px;
+    left: 13px;
+    top: 7px;
 }

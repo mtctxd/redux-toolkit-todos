@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   changeTitleOfTodo,
@@ -8,6 +9,7 @@ import {
 export const Todo = ({ todo, handleInput, setInputs, inputs }) => {
   const dispatch = useDispatch();
   const store = useSelector((state) => state);
+  const input = useRef();
   const { activeTodoToChange } = store;
 
   const handleTodoTitleKeyDown = (event, title, id) => {
@@ -19,6 +21,10 @@ export const Todo = ({ todo, handleInput, setInputs, inputs }) => {
     }
   };
 
+  useEffect(() => {
+    input.current && input.current.focus();
+  }, [activeTodoToChange])
+
   const toogleTodoInputActive = (id) => {
     dispatch(setActiveTodo(id));
     setInputs((state) => ({
@@ -28,29 +34,6 @@ export const Todo = ({ todo, handleInput, setInputs, inputs }) => {
   };
 
   return (
-    // <li className="list-group-item">
-    //   <input
-    //     type="checkbox"
-    //     checked={todo.completed}
-    //     onChange={() => dispatch(toggleCompletedTodo(todo.id))}
-    //   />
-    //   <span onClick={() => toogleTodoInputActive(todo.id)}>
-    //     {activeTodoToChange === todo.id ? (
-    //       <input
-    //         type="text"
-    //         name="inputToChange"
-    //         value={inputs.inputToChange}
-    //         onKeyDown={(event) =>
-    //           handleTodoTitleKeyDown(event, inputs.inputToChange, todo.id)
-    //         }
-    //         onChange={handleInput}
-    //         className="form-control"
-    //       />
-    //     ) : (
-    //       todo.title
-    //     )}
-    //   </span>
-    // </li>
     <li className="list-group-item task-container">
       <div>
         <div
@@ -65,7 +48,7 @@ export const Todo = ({ todo, handleInput, setInputs, inputs }) => {
             checked={todo.completed}
             onChange={() => dispatch(toggleCompletedTodo(todo.id))}
           />
-          <label className="btn btn-outline-primary" for={todo.id}>
+          <label className="btn btn-outline-primary" htmlFor={todo.id}>
             X
           </label>
         </div>
@@ -73,6 +56,7 @@ export const Todo = ({ todo, handleInput, setInputs, inputs }) => {
       <div className="task-item">
         {activeTodoToChange === todo.id ? (
           <input
+            ref={input}
             type="text"
             name="inputToChange"
             value={inputs.inputToChange}
