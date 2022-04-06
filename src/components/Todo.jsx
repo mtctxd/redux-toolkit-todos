@@ -53,7 +53,7 @@ export const Todo = ({ todo, handleInput, setInputs, inputs }) => {
           </label>
         </div>
       </div>
-      <div className="task-item">
+      <div className="task-item" onClick={() => toogleTodoInputActive(todo.id)}>
         {activeTodoToChange === todo.id ? (
           <input
             ref={input}
@@ -67,7 +67,7 @@ export const Todo = ({ todo, handleInput, setInputs, inputs }) => {
             className="form-control task-input"
           />
         ) : (
-          <span onClick={() => toogleTodoInputActive(todo.id)} className="task-title">
+          <span className="task-title">
             {todo.title}
           </span>
         )}

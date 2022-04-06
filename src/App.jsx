@@ -93,7 +93,7 @@ function App() {
   };
 
   return (
-    <div className="app">
+    <div>
       <div className="input-group mb-3 inputs-container">
         <button
           className="btn btn-outline-secondary dropdown-toggle"
