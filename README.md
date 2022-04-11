@@ -6,6 +6,24 @@
 
 #### type ``fetch`` to test fetching todos from api
 
+## TODO
+- [x] rework Todo.tsx
+- [ ] error handling on fetch
+- [x] add some styles
+- [x] implement saving to local storage
+- [ ] not correct item rendering after fetching with params (show 7 instead of 11)
+- [X] when trying to change tototitle it open multiple inputs
+- [ ] optimizing rendering
+- [ ] fetchTodos --> RTK Query
+- [X] keypress on changing todo and entering todo title
+- [ ] update README.md
+
+### type ``fetch`` to test fetching todos from api
+
+## Thoughts
+
+- make different slices (todosInteraction, formInteraction)
+
 ## Available Scripts
 
 In the project directory, you can run:
