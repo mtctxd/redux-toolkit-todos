@@ -1,10 +1,10 @@
 ## [DEMO](https://mtctxd.github.io/redux-toolkit-todos/)
 
-### type ``fetch`` to test fetching todos from api
+## Technologies used:
+- React
+- Redux-toolkit
 
-## Thoughts
-
-- make different slices (todosInteraction, formInteraction)
+#### type ``fetch`` to test fetching todos from api
 
 ## Available Scripts
 
