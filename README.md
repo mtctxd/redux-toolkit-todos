@@ -1,18 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
-
 ## [DEMO](https://mtctxd.github.io/redux-toolkit-todos/)
-
-## TODO
-- [ ] rework Todo.tsx
-- [ ] error handling on fetch
-- [x] add some styles
-- [ ] implement saving to local storage
-- [ ] not correct item rendering after fetching with params (show 7 instead of 11)
-- [X] when trying to change tototitle it open multiple inputs
-- [ ] optimizing rendering
-- [ ] fetchTodos --> RTK Query
-- [X] keypress on changing todo and entering todo title
-- [ ] update README.md
 
 ### type ``fetch`` to test fetching todos from api
 
