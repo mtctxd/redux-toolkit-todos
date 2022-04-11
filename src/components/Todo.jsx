@@ -49,7 +49,11 @@ export const Todo = ({ todo, handleInput, setInputs, inputs }) => {
             onChange={() => dispatch(toggleCompletedTodo(todo.id))}
           />
           <label className="btn btn-outline-primary" htmlFor={todo.id}>
-            X
+            {todo.completed ? (
+                <span>&#9989;</span>
+              ) : (
+                <span>&#10060;</span>
+            )}
           </label>
         </div>
       </div>

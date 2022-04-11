@@ -13,6 +13,8 @@ import {
   setAllTodosAsCompleted,
 } from './slices/todoSlice';
 
+import './index.css';
+
 const initilaInputsState = {
   newTodoTitle: '',
   inputToChange: '',
@@ -170,10 +172,10 @@ function App() {
         <button className="btn btn-outline-secondary" type="button" onClick={handleAddNewTodo}>
           ADD TASK
         </button>
-      </div>
       <span className='inputs-container_how-many-left fs-6 text-muted'>
         {`left: ${notCompletedItems().length}`}
       </span>
+      </div>
       <div>
         {(inputs.newTodoTitle === 'fetch') && (
           <div>
